@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/onsenui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+     
+
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/animate.css">
+  <script type="text/javascript" src="js/onsenui.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+
+    <title>Hello World</title>
+</head>
+<body>
+
+         <ons-page>
+  <ons-button onclick="createAlertDialog()">From Template</ons-button>
+  <ons-button onclick="notify()">Notification</ons-button>
+</ons-page>
+
+<template id="alert-dialog.html">
+  <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+    <div class="alert-dialog-title">Alert</div>
+    <div class="alert-dialog-content">
+      This dialog was created from a template
+    </div>
+    <div class="alert-dialog-footer">
+      <ons-alert-dialog-button onclick="hideAlertDialog()">Cancel</ons-alert-dialog-button>
+      <ons-alert-dialog-button onclick="hideAlertDialog()">OK</ons-alert-dialog-button>
+    </div>
+  </ons-alert-dialog>
+</template>
+         
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+</body>
+</html>
+
+ <script>
+var createAlertDialog = function() {
+  var dialog = document.getElementById('my-alert-dialog');
+
+  if (dialog) {
+    dialog.show();
+  } else {
+    ons.createElement('alert-dialog.html', { append: true })
+      .then(function(dialog) {
+        dialog.show();
+      });
+  }
+};
+
+var hideAlertDialog = function() {
+  document
+    .getElementById('my-alert-dialog')
+    .hide();
+};
+
+var notify = function() {
+  ons.notification.alert('This dialog was created with ons.notification');
+};
+ </script>

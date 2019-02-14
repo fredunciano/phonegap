@@ -9,123 +9,215 @@
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/onsenui.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-     
-
-  <link rel="stylesheet" href="css/onsen-css-components.css">
-  <link rel="stylesheet" href="css/animate.css">
-  <script type="text/javascript" src="js/onsenui.js"></script>
-  <script type="text/javascript" src="js/jquery.js"></script>
-
+    <link rel="stylesheet" href="css/onsen-css-components.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/onsenui.js"></script>
     <title>Hello World</title>
 </head>
 <body>
 
      
-      <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
 
-<template id="page1.html">
-  <ons-page id="page1">
-   
-     <div class="row-100">
-            <img id="logo-image" class="animated fadeInLeft" src="/img/logo.png" height="200" width="200">
-      </div>
-      <div class="row-50">         
-                <ons-input input-id="username" type="number" modifier="material underbar" placeholder="* * * * * * * * * * *"></ons-input>
-             
-      </div>
-      <div class="row">
-          <p>Please input your number</p>
-      </div>
-      <div class="row-50">
-          <button class="my-btn" id="push-button">Next</button>
-      </div>
-  </ons-page>
-</template>
+    <template id="page1.html">
+        <ons-page id="page1">
+            <div class="row-100">
+                <img id="logo-image" class="animated fadeInLeft" src="/img/logo.png" height="200" width="200">
+            </div>
+            <div class="row-50 animated fadeInLeft">         
+                <ons-input input-id="username" type="number" modifier="material underbar" placeholder="* * * * * * * * * * *"></ons-input> 
+            </div>
+            <div class="row animated fadeInLeft">
+                <p>Please input your number</p>
+            </div>
+            <div class="row-50 animated fadeInLeft">
+                <button class="my-btn" id="push-button">Next</button>
+            </div>
+        </ons-page>
+    </template>
+    <template id="page2.html">
+        <ons-page id="page2">
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Authentication</ons-back-button></div>
+            </ons-toolbar>
+            <div class="row mtop10">
+                <img src="img/otp.png" height="100" width="100">
+            </div>
+            <div class="#" style="margin-top: 10px;">
+                <center>Great! We sent a 6-digit</center>
+                <center>authentication code to your number</center>
+                <center>09162384421</center>
+            </div>
+            <div class="row" style="margin-top: 50px">
+                <form>
+                    <input id="codeBox1" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)"/>
+                    <input id="codeBox2" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)"/>
+                    <input id="codeBox3" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)"/>
+                    <input id="codeBox4" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)"/>
+                </form>
+            </div>
+            <div class="row">
+                <center><h5>Enter authentication code</h5></center>
+            </div>
+            <div class="bottom-btn">
+                <button class="my-btn" id="submit-btn">Submit</button>
+            </div>
+            <ons-bottom-toolbar modifier="transparent">
+                <center>Need new code? <a href="#">Resend now</a></center>
+            </ons-bottom-toolbar>
+        </ons-page>
+    </template>
+    <template id="page3.html">
+        <ons-page id="page3">
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Data Display</ons-back-button></div>
+            </ons-toolbar>
+            <ons-card modifier="material">
+                <img src="https://images.unsplash.com/photo-1502657877623-f66bf489d236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt="Onsen UI" style="width: 100%">
+                <div class="title">Aurora View | Alberta, Canada</div>
+                <div class="content">
+                    <div class="right">
+                        <ons-button id="ok">Show Data</ons-button>
+                <!--       <ons-button><ons-icon icon="ion-share"></ons-icon></ons-button> -->
+                    </div>
+                    <ons-list>
+                        <ons-list-header>Bindings</ons-list-header>
+                        <div id="result">
+                            <!-- list items here -->
+                        </div>
+                  </ons-list>
+                </div>
+            </ons-card>
+        </ons-page>
+    </template>
 
-<template id="page2.html">
-  <ons-page id="page2">
-    <ons-toolbar>
-      <div class="left"><ons-back-button>Authentication</ons-back-button></div>
-    </ons-toolbar>
-        <div class="row mtop10">
-            <img src="img/otp.png" height="100" width="100">
-        </div>
-        <div class="#" style="margin-top: 10px;">
-            <center>Great! We sent a 6-digit</center>
-            <center>authentication code to your number</center>
-            <center>09162384421</center>
-        </div>
-        <div class="row" style="margin-top: 50px">
-            <form>
-        <input id="codeBox1" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(1, event)" onfocus="onFocusEvent(1)"/>
-        <input id="codeBox2" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(2, event)" onfocus="onFocusEvent(2)"/>
-        <input id="codeBox3" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(3, event)" onfocus="onFocusEvent(3)"/>
-        <input id="codeBox4" type="number" class="otp_num" maxlength="1" onkeyup="onKeyUpEvent(4, event)" onfocus="onFocusEvent(4)"/>
-            </form>
-        </div>
-        <div class="row">
-            <center><h5>Enter authentication code</h5></center>
-        </div>
-        <div class="bottom-btn">
-            <button class="my-btn" id="push-button">Submit</button>
-        </div>
-
-        <ons-bottom-toolbar modifier="transparent">
-     <center>Need new code?  <a href="#">Resend now</a></center>
-    </ons-bottom-toolbar>
-  </ons-page>
-</template>
-
-        
-              
          
          
     
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
-   
-    
     <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 </body>
 </html>
-
+<script>
+    $.extend({
+        display_users: function(){
+            $.post('http://10.196.43.132/a/miner/getuser',{},
+              function(data){
+                var datas = $.parseJSON(data);
+                var html = '';
+                $.each(datas, function(i, val){
+                    html+='<ons-list-item>'+val.user+'  |  '+val.password+'</ons-list-item>';
+                })
+                $('#result').html(html);
+              }
+            )
+        },
+        navigator: function(page){
+            if (page.id === 'page1') {
+                page.querySelector('#push-button').onclick = function() {
+                    document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
+                };
+            }else if(page.id === 'page2'){
+                page.querySelector('#submit-btn').onclick = function() {
+                    document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 2'}});
+                };
+            }
+        }
+        
+    })
+</script>
  <script>
-document.addEventListener('init', function(event) {
-  var page = event.target;
+    document.addEventListener("init",function(event){
+        var page = event.target;
+        if(page="page3"){
+           $("#ok").click(function(){
+                $.display_users();
+            });  
+        };
 
-  if (page.id === 'page1') {
-    page.querySelector('#push-button').onclick = function() {
-      document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
-    };
-  } 
-});
+    });
+    document.addEventListener('init', function(event) {
+        var page = event.target;
+        $.navigator(page);
+    });
+
+     $(document).ready(function(){
 
 
-     function getCodeBoxElement(index) {
-        return document.getElementById('codeBox' + index);
-      }
-      function onKeyUpEvent(index, event) {
+        var val = Math.floor(1000 + Math.random() * 9000);
+        
+        sessionStorage.setItem("myVar", val);
+       
+        var message = sessionStorage.getItem("myVar")
+
+
+
+          var sendRequest = { 
+              user: "webcareer1@gmail.com",    // Replace with your user
+            pass: "Qwerty123", // Replace with your password
+            source: "447797876578",        // Replace with your sender ID
+            destination: "09177886131", // Replace with the recipient number 
+            sms: message+' is your verification code',           // Replace with your message 
+ 
+         }; 
+ 
+         // var url = "http://api.123-txt.com/Api123WCF.svc/rest/SendSms"; 
+         //     url += "?" + $.param(sendRequest); 
+         //     $.ajax({ 
+         //     type: 'GET', 
+         //     url: url, 
+         //     dataType: 'json', 
+         //     success: function (res) { 
+         //                   console.log(res); //Handle Response 
+         //                    } 
+         //  }); 
+    })
+
+
+    function getCodeBoxElement(index) {
+            return document.getElementById('codeBox' + index);
+     }
+    function onKeyUpEvent(index, event) {
         const eventCode = event.which || event.keyCode;
         if (getCodeBoxElement(index).value.length === 1) {
-          if (index !== 4) {
-            getCodeBoxElement(index+ 1).focus();
-          } else {
-            getCodeBoxElement(index).blur();
+            if (index !== 4) {
+                getCodeBoxElement(index+ 1).focus();
+            } else {
+                getCodeBoxElement(index).blur();
             // Submit code
-            console.log('submit code ');
-          }
-        }
+                
+                var inputs = $('.otp_num');
+                var num;
+                for(var i = 0; i <= inputs.length; i++){
+                  num+= $('#codeBox'+i).val();
+                }
+                var cc = num.replace(/[^\d]/g, "");
+                    if(cc == sessionStorage.getItem("myVar")){
+                        console.log("ok na code mo");
+                    }else{
+                        console.log("Mali code mo");
+                        return false;
+                    }
+            }
+         }
         if (eventCode === 8 && index !== 1) {
           getCodeBoxElement(index - 1).focus();
         }
-      }
-      function onFocusEvent(index) {
+    }
+    function onFocusEvent(index) {
         for (item = 1; item < index; item++) {
-          const currentElement = getCodeBoxElement(item);
-          if (!currentElement.value) {
-              currentElement.focus();
-              break;
-          }
+            const currentElement = getCodeBoxElement(item);
+            if (!currentElement.value) {
+                currentElement.focus();
+                break;
+            }
         }
-      }
+    }
+
+   
+
+
+    
  </script>
