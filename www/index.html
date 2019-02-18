@@ -91,6 +91,37 @@
             </ons-card>
         </ons-page>
     </template>
+    <template id="page4.html">
+        <ons-page id="page4">
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Data Display</ons-back-button></div>
+            </ons-toolbar>
+            <a href="#" style="font-style: none; text-decoration: none;color: black;">
+               <!--  <ons-card modifier="material" tappable>
+                    <ons-ripple></ons-ripple>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzMqQOt4ykYniHCm21mXxAVECTX_B5ItfwD56Zef3pbVT8svm2SwjXpg" alt="Onsen UI" style="width:100%" height="200"> -->
+                    <div class="content" id="plant">
+                       <!-- <ons-list>
+                            <ons-list-item expandable> Agus 1 Hydroelectric Power Plant
+                                <div class="expandable-content">
+                                    <ons-list>
+                                        <ons-list-item><bold class="hd">Capacity: </bold> 600.00 MW</ons-list-item>  
+                                        <ons-list-item><bold class="hd">Commissioned: </bold> 1998</ons-list-item>
+                                        <ons-list-item><bold class="hd">Operator: </bold> </ons-list-item>
+                                        <ons-list-item><bold class="hd">Community: </bold> Marawi City Lanao del sur</ons-list-item>
+                                        <ons-list-item><bold class="hd">Plant Type: </bold> Hydroelectric</ons-list-item>
+                                        <ons-list-item><bold class="hd">Resource Type: </bold> Renewable</ons-list-item>
+                                    </ons-list>
+                                </div>
+                            </ons-list-item>
+                       </ons-list> -->
+                    </div>
+                <!-- </ons-card> -->
+            </a>
+          
+        </ons-page>
+
+    </template>
 
          
          
@@ -117,14 +148,38 @@
         navigator: function(page){
             if (page.id === 'page1') {
                 page.querySelector('#push-button').onclick = function() {
-                    document.querySelector('#myNavigator').pushPage('page2.html', {data: {title: 'Page 2'}});
+                    document.querySelector('#myNavigator').pushPage('page4.html', {data: {title: 'Page 4'}});
                 };
             }else if(page.id === 'page2'){
                 page.querySelector('#submit-btn').onclick = function() {
                     document.querySelector('#myNavigator').pushPage('page3.html', {data: {title: 'Page 2'}});
                 };
             }
-        }
+        },
+        display_plant: function(){
+            var status = "Operational";
+            var type = "0";
+            var res_type = "Non-renewable";
+            $.post('http://10.196.43.132/a/miner/final_display',{status:status, type:type, res_type:res_type},
+              function(data){
+                // console.log(data);
+                // return false;
+                var datas = $.parseJSON(data);
+                var html = '';
+                $.each(datas, function(i, val){
+                    html+='<ons-card modifier="material" tappable><ons-ripple></ons-ripple><img src="'+val.image+'" alt="Onsen UI" style="width:100%" height="200">';
+                    html+=' <ons-list><ons-list-item expandable>'+val.station+'<div class="expandable-content"><ons-list>';
+                         html+='<ons-list-item><bold class="hd">Capacity: </bold>' +val.capacity+'MW</ons-list-item>';
+                        html+='<ons-list-item><bold class="hd">Commissioned: </bold>'+val.commissioned+'</ons-list-item>';
+                        html+='<ons-list-item><bold class="hd">Operator: </bold>'+ val.operator+' </ons-list-item>';
+                        html+='<ons-list-item><bold class="hd">Community: </bold> '+val.community_loc+'</ons-list-item>';
+                        html+='<ons-list-item><bold class="hd">Plant Type: </bold>'+val.plant_type+'</ons-list-item>';
+                        html+='<ons-list-item><bold class="hd">Resource Type: </bold>'+val.resource_type+'</ons-list-item></ons-list></div></ons-list-item></ons-list> </ons-card>';
+                })
+                $('#plant').html(html);
+              }
+            )
+        },
         
     })
 </script>
@@ -136,13 +191,22 @@
                 $.display_users();
             });  
         };
+       
 
     });
     document.addEventListener('init', function(event) {
         var page = event.target;
         $.navigator(page);
     });
-
+    document.addEventListener("init",function(event){
+        var page = event.target;
+       
+         if(page ="page4"){
+                $.display_plant(); 
+              
+           
+        }
+    });
      $(document).ready(function(){
 
 
